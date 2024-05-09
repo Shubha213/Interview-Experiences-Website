@@ -1,0 +1,34 @@
+<div class="container1">
+<div class="create">
+  <div class="input-group input-group-lg">
+    <span class="input-group-text" id="inputGroup-sizing-lg">Blog Title</span>
+    <input
+      type="text"
+      [(ngModel)]="blog_title"
+      class="form-control"
+      aria-label="Sizing example input"
+      aria-describedby="inputGroup-sizing-lg"
+    />
+  </div>
+  <br />
+  <div class="container2">
+    <angular-editor
+      id="edi"
+      class="angular-editor-input"
+      [(ngModel)]="blog_text"
+      [config]="config"
+      (imageUpload)="uploadImage($event)"
+    >
+    </angular-editor>
+    <br />
+  </div>
+  <div class="tagsin">
+    <label for="">Tags : </label>
+    <input placeholder="#Tag" type="text" value="Add Tags" [(ngModel)]="tag" required />
+  </div>
+  <br />
+  <div class="subbutton">
+    <button (click)="submitblog()">Submit</button>
+  </div>
+</div>
+</div>

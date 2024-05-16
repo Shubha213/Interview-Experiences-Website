@@ -25,8 +25,9 @@ export class ShowBlogComponent implements OnInit {
 
   ngOnInit(): void {
      const id = this.activatedRoute.snapshot.paramMap.get('blogid');
-    // const id=1
     this.showblog(id);
+    console.log(id);
+    
   }
 
   startDelay(id:any): void {

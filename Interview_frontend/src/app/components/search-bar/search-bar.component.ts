@@ -12,18 +12,18 @@ export class SearchBarComponent {
   public p = 1;
   
   constructor(private serachService : SearchService) { }
-  blogs: blog[] = [];
+  // blogs: blog[] = [];
 
   search() {
     console.log('Searching for:', this.searchTerm);
-    this.load();
+    // this.load();
   }
 
-  load(){
-    this.serachService.serachData(this.searchTerm).subscribe((data: blog[]) => {
-      this.blogs = data;
-    });
-    console.log(this.blogs);
+  // load(){
+  //   this.serachService.serachData(this.searchTerm).subscribe((data: blog[]) => {
+  //     this.blogs = data;
+  //   });
+  //   console.log(this.blogs);
     
-  }
+  // }
 }

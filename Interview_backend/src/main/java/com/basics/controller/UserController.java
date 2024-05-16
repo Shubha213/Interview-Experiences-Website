@@ -36,10 +36,11 @@ public class UserController {
 	}
 	
 	@PostMapping("/visited")
-	public void addView(@RequestBody VisitRequest visit) {
+	public boolean addView(@RequestBody VisitRequest visit) {
         BlogUserId id = new BlogUserId(visit.getBlogId(), visit.getUserId());
         Visiting visiting = new Visiting(id, visit.getRating());
         visitRepo.save(visiting);
+        return true;
 	}
 	
 	@PostMapping("/login")

@@ -20,3 +20,8 @@ export class blog{
 	views!:number;
 	likes!:number;
 }
+export class visited{
+    blogId!: number;
+    userId!: number;
+    rating = 3.5;
+}

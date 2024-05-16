@@ -5,6 +5,7 @@ import { delay } from 'rxjs';
 import { blogd, userN } from 'src/app/models/create-blog';
 import { BlogService } from 'src/app/_services/blog.service';
 import { ActivatedRoute } from '@angular/router';
+import { visited } from 'src/app/models/users';
 
 @Component({
   selector: 'app-show-blog',
@@ -12,51 +13,60 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./show-blog.component.css'],
 })
 export class ShowBlogComponent implements OnInit {
-  constructor(private blogService: BlogService, private activatedRoute:ActivatedRoute) {}
+  constructor(
+    private blogService: BlogService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   blogtitle = '';
   blogtxt = `lorem`;
   name = '';
-  f=0;
+  f = 0;
   numlike = 0;
   // id =0;
   nid = 0;
   bdata: blogd = new blogd();
-
+  visit: visited = new visited();
   ngOnInit(): void {
-     const id = this.activatedRoute.snapshot.paramMap.get('blogid');
+    const id = this.activatedRoute.snapshot.paramMap.get('blogid');
     this.showblog(id);
-    console.log(id);
-    
   }
 
-  startDelay(id:any): void {
+  startDelay(id: any): void {
     setTimeout(() => {
       this.viewed(id);
     }, 5000); // Delay of 5 seconds (5000 milliseconds)
   }
 
-  viewed(id : any) {
+  viewed(id: any) {
     this.nid = id;
     delay(5000);
-    this.blogService.viewUpdate(id).subscribe((data) => {
-      console.log(data);
+    this.blogService.viewUpdate(id).subscribe(
+      (data) => {}
+    );
+    this.blogService.visiting(this.visit).subscribe((data) => {
+      console.log("my in upate " + data);
     });
   }
 
   likein() {
-    if(this.f==1) {this.f=0;
-    this.numlike--;
-  this.blogService.liked(this.nid).subscribe((data)=>{console.log(data);
-  })}
-    else {this.f=1;
-    this.numlike++;
-    this.blogService.likein(this.nid).subscribe((data)=>{console.log(data);
-    })}
+    if (this.f == 1) {
+      this.f = 0;
+      this.numlike--;
+      this.blogService.liked(this.nid).subscribe((data) => {
+        console.log(data);
+      });
+    } else {
+      this.f = 1;
+      this.numlike++;
+      this.blogService.likein(this.nid).subscribe((data) => {
+        console.log(data);
+      });
+    }
   }
 
   x: any = undefined;
-  showblog(id:any) {
+  showblog(id: any) {
     this.blogService.getBlog(id).subscribe((data) => {
       console.log(data);
       this.x = data;
@@ -67,10 +77,14 @@ export class ShowBlogComponent implements OnInit {
       this.numlike = this.bdata.likes;
       this.UserName(id);
     });
+
+    this.visit.blogId = parseInt(id || '');
+    this.visit.userId = parseInt(sessionStorage.getItem('userid') || '');
+    console.log(this.visit.blogId + ' ' + this.visit.userId);
   }
   y: any = undefined;
   u: userN = new userN();
-  UserName(id:any) {
+  UserName(id: any) {
     // console.log(this.bdata.user_id);
 
     this.blogService.getName(this.bdata.user_id).subscribe((data) => {

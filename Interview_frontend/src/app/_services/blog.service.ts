@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, Observable } from 'rxjs';
 import { blogd } from '../models/create-blog';
-import { blog } from '../models/users';
+import { blog, visited } from '../models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +64,11 @@ export class BlogService {
   }
   nextPage(pno : number) : Observable<blog[]>{
     return this.httpClient.get<blog[]>(`${this.blogURL}/byid/${pno}`);
+  }
+
+  visiting(visit :visited) :Observable<boolean>{
+    console.log(visit.blogId  + " " + visit.userId);
+    
+    return this.httpClient.post<boolean>(`${"http://localhost:8884/userapi/visited"}`, visit);
   }
 }

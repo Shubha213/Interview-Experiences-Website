@@ -28,7 +28,7 @@ nltk.download('stopwords')
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="itsa",
+    password="Shubham@123",
     database="finalyear"
 )
 

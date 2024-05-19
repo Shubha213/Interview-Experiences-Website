@@ -64,10 +64,17 @@ public class BlogController {
 		blogService.disLike(blogId);
 	}
 	
-	@GetMapping("/byid/{page}")
-    public List<Blog> getBlogsByPage(@PathVariable int page) {
-        return blogService.getBlogsByPage(page);
-    }
+	@GetMapping("/byid/{page}/{userid}")
+    public List<Blog> getBlogsByPage(@PathVariable int page, @PathVariable int userid) {
+//		int userid = 3;
+		System.out.println(page + " " + userid);
+		if(page-1 == 0 && userid !=0) {
+			System.out.println("in recom " + userid);
+			return flaskService.first10Recommend(userid);			
+		}
+
+		return blogService.getBlogsByPage(page-1);
+	}
 	
 	@GetMapping("/views/{blog_id}")
 	public boolean updateViews(@PathVariable long blog_id) {
@@ -79,4 +86,5 @@ public class BlogController {
     	System.out.println("Searching");
         return flaskService.callFlaskEndpoint(sentence);
     }
+    
 }

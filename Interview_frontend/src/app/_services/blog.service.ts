@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { delay, Observable } from 'rxjs';
 import { blogd } from '../models/create-blog';
@@ -63,7 +63,15 @@ export class BlogService {
         BlogService.page = n;
   }
   nextPage(pno : number) : Observable<blog[]>{
-    return this.httpClient.get<blog[]>(`${this.blogURL}/byid/${pno}`);
+    let vs = this.getId();
+    console.log("it is " + sessionStorage.getItem('userid'));
+
+    if(isNaN(vs)){
+      vs=0;
+      pno++;
+    }
+    
+    return this.httpClient.get<blog[]>(`${this.blogURL}/byid/${pno}/${vs}`);
   }
 
   visiting(visit :visited) :Observable<boolean>{

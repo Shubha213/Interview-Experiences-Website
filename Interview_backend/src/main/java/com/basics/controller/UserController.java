@@ -37,6 +37,7 @@ public class UserController {
 	
 	@PostMapping("/visited")
 	public boolean addView(@RequestBody VisitRequest visit) {
+		System.out.println("into the visit");
         BlogUserId id = new BlogUserId(visit.getBlogId(), visit.getUserId());
         Visiting visiting = new Visiting(id, visit.getRating());
         visitRepo.save(visiting);

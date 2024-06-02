@@ -1,0 +1,32 @@
+.container1{
+    background-color: #e7e2e2;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 2% 0 0 0;
+}
+.blog-list-div{
+    background-color: white;
+    border-radius: 1%;
+    width: 90%;
+    /* border: 1px solid red; */
+    margin: 0 4% 0 4%;
+    padding: 0;
+  }
+  .search-bar{
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 5%;
+    width: 90%;
+    margin: 0 4% 0 4%;
+  }
+  .back-button{
+    justify-content: center;
+    align-items: center;
+    /* background-color: white; */
+    border-radius: 5%;
+    width: 90%;
+    margin: 0 4% 0 4%;
+  }

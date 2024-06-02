@@ -10,12 +10,28 @@
       <a routerLink="/search-bar">
         <p id="navItem"><i class="fa fa-search"></i></p>
       </a>
-      <a routerLink="/create-blog">
-        <p id="navItem">Write Blog</p>
-      </a>
-      <a routerLink="/profile">
+
+      <!-- <a (click)="checkloginForWriteBlog()">
+        <p id="navItem">Write Experience</p>
+      </a> -->
+
+      <ng-container *ngIf="isloggedin()">
+        <a routerLink="/create-blog"><p id="navItem">Write Experience</p></a>
+      </ng-container>
+
+      <!-- <a (click)="checkloginForProfile()">
         <p id="navItem">Profile</p>
-      </a><br>
+      </a><br> -->
+
+      <ng-container *ngIf="isloggedin(); else elseBlock">
+        <a routerLink="/profile"><p id="navItem">Profile</p></a>
+      </ng-container>
+      <ng-template #elseBlock>
+        <a routerLink="/login"><p id="navItem">Login</p></a>
+      </ng-template>
+
+      <br>
+
     </span>
   </div>
 

@@ -35,12 +35,12 @@ export class ShowBlogComponent implements OnInit {
   startDelay(id: any): void {
     setTimeout(() => {
       this.viewed(id);
-    }, 5000); // Delay of 5 seconds (5000 milliseconds)
+    }, 2000); // Delay of 5 seconds (5000 milliseconds)
   }
 
   viewed(id: any) {
     this.nid = id;
-    delay(5000);
+    delay(2000);
     this.blogService.viewUpdate(id).subscribe(
       (data) => {}
     );

@@ -67,13 +67,14 @@ public class BlogController {
 	@GetMapping("/byid/{page}/{userid}")
     public List<Blog> getBlogsByPage(@PathVariable int page, @PathVariable int userid) {
 //		int userid = 3;
-		System.out.println(page + " " + userid);
+//		System.out.println(page + " " + userid);
 		if(page-1 == 0 && userid !=0) {
 			System.out.println("in recom " + userid);
 			return flaskService.first10Recommend(userid);			
 		}
 
-		return blogService.getBlogsByPage(page-1);
+		
+		return blogService.getBlogsByPage(page);
 	}
 	
 	@GetMapping("/views/{blog_id}")

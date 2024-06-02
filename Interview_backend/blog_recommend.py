@@ -30,7 +30,7 @@ from bs4 import BeautifulSoup
 connection = mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Shubham@123",
+    password="itsa",
     database="finalyear"
 )
 
@@ -247,8 +247,14 @@ def give_recomm_ids(user_id):
 
     # Now we need Id's of this blogs in form of a list
     high_rated_blogs = blogs_to_consider.values
-    
+
     similar_blog_ids =  get_similar_blog(high_rated_blogs) 
+
+    if user_rating.empty:
+        print("sfd")
+        most_viewed_blogs = blog_df.nlargest(10, 'views')
+        most_viewed_blog_ids = most_viewed_blogs['blog_id'].tolist()
+        similar_blog_ids = most_viewed_blog_ids
 
     similar_blogs = []
     # df.drop(['cleaned_tags'],axis='columns',inplace=True) 
@@ -256,5 +262,5 @@ def give_recomm_ids(user_id):
         blog = blog_df[blog_df['blog_id'] == blog_id].iloc[0]  # Assuming 'blog_id' is the column name for blog IDs
         if not blog.empty:
             similar_blogs.append(blog)
-    
+
     return similar_blogs
